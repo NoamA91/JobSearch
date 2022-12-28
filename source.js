@@ -141,7 +141,7 @@ allJobs_btn.addEventListener("click", async (e) => {
     container.id = "other";
     try {
         container.innerHTML = spinner;
-        const response = await fetch("https://remotive.com/api/remote-jobs?limit=200");
+        const response = await fetch("https://remotive.com/api/remote-jobs?limit=50");
         const data = await response.json();
         const jobs = data.jobs;
         showCards(jobs)
