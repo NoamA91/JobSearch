@@ -59,11 +59,19 @@ saved_jobs_page.addEventListener("click", () => {
             saved_jobs_array = [];
             localStorage.setItem("jobs", JSON.stringify(saved_jobs_array));
             clear_btn.style = "display:none";
-            container.innerHTML = `<div class="alert alert-success" role="alert">
+            const message = document.createElement("div");
+            message.innerHTML = `<div class="alert alert-success" role="alert">
                                         All saved Jobs were cleared successfully
                                         <i class="bi bi-check-circle"></i>
                                         </div>`;
+            container.append(message);
             badgeUpdate(saved_jobs_array);
+            setTimeout(() => {
+                message.innerHTML = `<div class="alert alert-primary" role="alert">
+                                No saved Jobs exists in the system
+                                <i class="bi bi-info-circle"></i>
+                                </div>`
+            }, 3000)
         })
         const row_div = document.querySelector(".row");
         container.insertBefore(clear_btn, row_div);
