@@ -65,13 +65,13 @@ saved_jobs_page.addEventListener("click", () => {
                                         <i class="bi bi-check-circle"></i>
                                         </div>`;
             container.append(message);
-            badgeUpdate(saved_jobs_array);
             setTimeout(() => {
                 message.innerHTML = `<div class="alert alert-primary" role="alert">
-                                No saved Jobs exists in the system
-                                <i class="bi bi-info-circle"></i>
-                                </div>`
+                No saved Jobs exists in the system
+                <i class="bi bi-info-circle"></i>
+                </div>`
             }, 3000)
+            badgeUpdate(saved_jobs_array);
         })
         const row_div = document.querySelector(".row");
         container.insertBefore(clear_btn, row_div);
