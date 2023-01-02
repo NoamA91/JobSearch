@@ -281,19 +281,19 @@ const showCards = (jobs) => {
             badgeUpdate(saved_jobs_array);
         });
 
-        const job_site = document.createElement("a");
-        job_site.innerHTML = `See this Job <i class="bi bi-box-arrow-up-right"></i>`;
-        job_site.className = "btn btn-success";
-        job_site.href = job.url;
-        job_site.setAttribute("target", "_blank")
-        job_site.style = "margin-left: 12px;";
+        const job_site_btn = document.createElement("a");
+        job_site_btn.innerHTML = `See this Job <i class="bi bi-box-arrow-up-right"></i>`;
+        job_site_btn.className = "btn btn-success";
+        job_site_btn.href = job.url;
+        job_site_btn.setAttribute("target", "_blank")
+        job_site_btn.style = "margin-left: 12px;";
 
         // check if the job is already saved and append the correct button to the card
         if (saved_jobs_array.find(key => key.id == job.id)) {
-            card_bottom.append(remove_job_btn, job_site);
+            card_bottom.append(remove_job_btn, job_site_btn);
         }
         else {
-            card_bottom.append(save_job_btn, job_site);
+            card_bottom.append(save_job_btn, job_site_btn);
         }
 
         // card footer
