@@ -7,6 +7,7 @@ const saved_jobs_page = document.querySelector("#saved_jobs_page");
 const search_btn = document.querySelector("#search_btn");
 const search_input = document.querySelector("#search_input");
 const clear_btn = document.querySelector("#clear_btn");
+const body = document.querySelector("body");
 const spinner = `<div class="d-flex justify-content-center">
   <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
@@ -88,15 +89,32 @@ saved_jobs_page.addEventListener("click", () => {
 
 // default page on reload
 window.onload = () => {
-    container.innerHTML = welcome;
-    badgeUpdate(saved_jobs_array);
+    if (body.className == ! "darkMode") {
+        container.innerHTML = welcome;
+        badgeUpdate(saved_jobs_array);
+    }
+    else {
+        container.innerHTML = welcome;
+        badgeUpdate(saved_jobs_array);
+        $(".alert").removeClass("alert-primary");
+        $(".alert").addClass("alert-dark");
+    }
 }
 
 // home page button
 home_btn.addEventListener("click", (e) => {
     e.preventDefault();
-    pageTitle.innerHTML = "";
-    container.innerHTML = welcome;
+    if (body.className !== "dark-mode") {
+        pageTitle.innerHTML = "";
+        container.innerHTML = welcome;
+    }
+    else {
+        pageTitle.innerHTML = "";
+        container.innerHTML = welcome;
+        $(".alert").removeClass("alert-primary");
+        $(".alert").addClass("alert-dark");
+    }
+
 });
 
 
@@ -174,7 +192,9 @@ const showCards = (jobs) => {
     row_div.className = "row";
 
     jobs.map(job => {
+        if (body) {
 
+        }
         // card container
         const card_container = document.createElement("div");
         card_container.className = "col-md-4 col-sm-6 mt-3";
@@ -308,6 +328,16 @@ const showCards = (jobs) => {
         row_div.append(card_container);
         container.append(row_div);
     })
+
+    // cards dark-mode
+    if (body.className == "dark-mode") {
+        $(".card").removeClass("bg-light");
+        $(".card").addClass("bg-dark");
+        $(".card").removeClass("border-primary");
+        $(".card").addClass("border-success");
+        $(".card").addClass("text-light");
+        $(".card").removeAttr("style");
+    }
 }
 
 // search button
@@ -369,3 +399,54 @@ const badgeUpdate = (array) => {
         badge.innerHTML = "";
     }
 }
+
+
+
+// Dark-Mode toggle button
+let darkMode = localStorage.getItem("darkMode");
+$(document).ready(function () {
+    if (localStorage.getItem("dark-mode") === "true") {
+        // Set the "dark-mode" class on the body element
+        $("body").addClass("dark-mode");
+        // Set the toggle switch to the "on" state
+        $("#toggleSwitch").prop("checked", true);
+    }
+    $("#toggleSwitch").on("click", function () {
+        // Toggle a class on the body element to change the styling
+        $("body").toggleClass("dark-mode");
+
+        // Set the "dark-mode" variable in the local storage
+        localStorage.setItem("dark-mode", $("body").hasClass("dark-mode"));
+
+
+        // Check if the body element has the "dark-mode" class
+        if ($("body").hasClass("dark-mode")) {
+            // navbar
+            $(".navbar").removeClass("bg-primary");
+            $(".navbar").addClass("bg-success");
+
+            //categories
+            $(".dropdown-menu").addClass("bg-success");
+            $(".dropdown-item").addClass("text-dark");
+
+            //card
+            $(".card").removeClass("bg-light");
+            $(".card").addClass("bg-dark");
+            $(".card").removeClass("border-primary");
+            $(".card").addClass("border-success");
+            $(".card").addClass("text-light");
+            $(".card").removeAttr("style");
+
+            //page title
+            $("#pageTitle").addClass("text-light");
+
+
+
+        } else {
+            // Remove the "bg-dark" class from the other elements
+            $(".other-element").removeClass("bg-dark");
+            // Add the "bg-light" class to the other elements
+            $(".other-element").addClass("bg-light");
+        }
+    });
+});

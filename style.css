@@ -1,0 +1,60 @@
+.toggle-container {
+    display: inline-block;
+    width: 100px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    margin-right: 10px;
+    font-size: small;
+}
+
+label::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 20px;
+    transition: background 0.3s;
+}
+
+input[type="checkbox"]:checked+label::before {
+    background: #4caf50;
+}
+
+label::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 16px;
+    transition: all 0.3s;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+input[type="checkbox"]:checked+label::after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+}
+
+/* .bgc-dark {
+    background: #010a0f;
+} */
+
+.dark-mode {
+    background-color: #010a0f;
+}
